@@ -127,10 +127,6 @@ func writeBikesToCSV(bikes []Bike, filename string) error {
 	return nil
 }
 
-// Go to this page, identify that location is still being measured (expect 154 results), divide by 10, if remainder, its ans+1 pages
-// Scrape 10 pages at the same time, write to a file, then move on to the next 10 pages (use mutexes and whatnot)
-// initialize a slice of struct Bike
-
 // detect number of "bike-box-item" per page
 // divide find total no of pages
 
@@ -145,8 +141,6 @@ func scrapeBikes(page playwright.Page) ([]Bike, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not find bike boxes: %v", err)
 	}
-
-	fmt.Println(len(bikeBoxes))
 
 	// Iterate over each bike box
 	for _, bikeBox := range bikeBoxes {
@@ -180,9 +174,6 @@ func scrapeBikes(page playwright.Page) ([]Bike, error) {
 			if err != nil {
 				return nil, fmt.Errorf("could not find title: %v", err)
 			}
-
-			// 2 lists per box
-			// fmt.Println(len(li))
 
 			// each list has 2 list items (1st is title, 2nd is value)
 			for _, item := range li {
